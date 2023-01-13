@@ -3,7 +3,7 @@ var selectedRow = null;
 function storage() { 
     let firstName = document.getElementById("#firstName").value;
     let lastName = document.getElementById("#lastName").value;
-    let rollNo = document.getElementById("rollNo").value;
+    let rollNo = document.getElementById("#rollNo").value;
 
 
     let inputValue = ({
