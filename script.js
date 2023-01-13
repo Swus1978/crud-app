@@ -1,4 +1,28 @@
 var selectedRow = null;
+//local storage
+function storage() { 
+    let firstName = document.getElementById("#firstName").value;
+    let lastName = document.getElementById("#lastName").value;
+    let rollNo = document.getElementById("rollNo").value;
+
+
+    let inputValue = ({
+        "first name": firstName,
+        "last name": lastName,
+        "rollNo": rollNo
+    })
+    //conditions ? expression1 : expression2 Local storage setting
+    let data = JSON.parse(localStorage.getItem('Users')) ? JSON.parse(localStorage.getItem('Users')) :
+        []
+    data.push(inputValue)
+    console.log(JSON.stringify(data));
+    localStorage.setItem('Users', JSON.stringify(data)); 
+    // clean up inputs
+    document.getElementById("#firstName").value = '';
+    document.getElementById("#lastName").value = '';
+    document.getElementById("#rollNo").value = '';
+}
+
 
 
 //show alerts
