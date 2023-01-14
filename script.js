@@ -1,28 +1,13 @@
 var selectedRow = null;
 //local storage
-function storage() { 
-    let firstName = document.getElementById("#firstName").value;
-    let lastName = document.getElementById("#lastName").value;
-    let rollNo = document.getElementById("#rollNo").value;
+const input = document.querySelector('input');
+td = document.querySelector('td');
+input.addEventListener('keydown', display);
 
-
-    let inputValue = ({
-        "first name": firstName,
-        "last name": lastName,
-        "rollNo": rollNo
-    })
-    //conditions ? expression1 : expression2 Local storage setting
-    let data = JSON.parse(localStorage.getItem('Users')) ? JSON.parse(localStorage.getItem('Users')) :
-        []
-    data.push(inputValue)
-    console.log(JSON.stringify(data));
-    localStorage.setItem('Users', JSON.stringify(data)); 
-    // clean up inputs
-    document.getElementById("#firstName").value = '';
-    document.getElementById("#lastName").value = '';
-    document.getElementById("#rollNo").value = '';
+function display() {
+    localStorage.setItem('Users', input.value);
+    tbody.innerHTML = localStorage.getItem('Users');
 }
-
 
 
 //show alerts
@@ -44,9 +29,9 @@ function showAlert(message, className) {
 
 
 function clearAllFields() {
-    document.querySelector('#firstName') .value = "";
-    document.querySelector('#lastName') .value = "";
-    document.querySelector('#rollNo') .value = "";
+    document.querySelector('#firstName').value = "";
+    document.querySelector('#lastName').value = "";
+    document.querySelector('#rollNo').value = "";
 }
 //Add Data
 
@@ -61,7 +46,7 @@ document.querySelector("#student-form").addEventListener("submit", (e) => {
     //Validate  
     if (firstName == "" || lastName == "" || rollNo == "") {
         showAlert("Please fill in all fields", "danger");
-        
+
     }
     else {
         if (selectedRow == null) {
@@ -73,8 +58,8 @@ document.querySelector("#student-form").addEventListener("submit", (e) => {
             <td>${lastName}</td>
             <td>${rollNo}</td>
             <td>
-            <a href="#" class="btn btn-warning btn-sm edit">Edit</a>
-            <a href="#" class="btn btn-danger btn-sm delete">Delete</a>
+            <button class="btn btn-warning btn-sm edit">Edit</button>
+            <button  class="btn btn-danger btn-sm delete">Delete</button>
             
             `;
             list.appendChild(row);
@@ -102,12 +87,12 @@ document.querySelector("#student-list").addEventListener("click", (e) => {
         document.querySelector("#rollNo").value = selectedRow.children[2].textContent;
     }
 
-    });
+});
 
 // Delete data
 
 
-document.querySelector("#student-list").addEventListener("click", (e) =>{
+document.querySelector("#student-list").addEventListener("click", (e) => {
     target = e.target;
     if (target.classList.contains("delete")) {
         target.parentElement.parentElement.remove();
